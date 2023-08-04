@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Search from "./components/Search";
+import Task from "./components/Task";
 
 function App() {
+  const [list, setList] = useState([]);
+
+  let addList = (inputText) => {
+    setList([...list, inputText]);
+  };
+
+  const handleDelete = (key) => {
+    let newList = [...list];
+    newList.splice(key, 1);
+    setList(newList);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-container">
+      <div className="center-container">
+        <Search addList={addList} />
+        <h1 className="app-heading">TODO</h1>
+        <hr></hr>
+        {list.map((listItem, i) => {
+          return (
+            <Task
+              key={i}
+              index={i}
+              list={listItem}
+              handleDelete={handleDelete}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
