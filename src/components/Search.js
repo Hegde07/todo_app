@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../App.css";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 const Search = ({ addList }) => {
   const [inputText, setInputText] = useState("");
 
